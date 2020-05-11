@@ -23,7 +23,7 @@ module "httpbin" {
   name          = "httpbin"
   subnet_id     = module.vpc.subnet_id
   vpc_id        = module.vpc.vpc_id
-
+  instance_count = 2
   key_name      = "terraform"
 
   install_file  = "install_docker.sh"

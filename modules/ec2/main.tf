@@ -45,6 +45,7 @@ module "label" {
 }
 
 resource "aws_instance" "default" {
+  count                       = var.instance_count
   ami                         = data.aws_ami.ami.id
   availability_zone           = var.availability_zone
   instance_type               = var.instance_type

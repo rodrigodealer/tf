@@ -159,42 +159,6 @@ variable "root_volume_size" {
   default     = 10
 }
 
-variable "root_iops" {
-  type        = number
-  description = "Amount of provisioned IOPS. This must be set if root_volume_type is set to `io1`"
-  default     = 0
-}
-
-variable "ebs_device_name" {
-  type        = list(string)
-  description = "Name of the EBS device to mount"
-  default     = ["/dev/xvdb", "/dev/xvdc", "/dev/xvdd", "/dev/xvde", "/dev/xvdf", "/dev/xvdg", "/dev/xvdh", "/dev/xvdi", "/dev/xvdj", "/dev/xvdk", "/dev/xvdl", "/dev/xvdm", "/dev/xvdn", "/dev/xvdo", "/dev/xvdp", "/dev/xvdq", "/dev/xvdr", "/dev/xvds", "/dev/xvdt", "/dev/xvdu", "/dev/xvdv", "/dev/xvdw", "/dev/xvdx", "/dev/xvdy", "/dev/xvdz"]
-}
-
-variable "ebs_volume_type" {
-  type        = string
-  description = "The type of EBS volume. Can be standard, gp2 or io1"
-  default     = "gp2"
-}
-
-variable "ebs_volume_size" {
-  type        = number
-  description = "Size of the EBS volume in gigabytes"
-  default     = 10
-}
-
-variable "ebs_iops" {
-  type        = number
-  description = "Amount of provisioned IOPS. This must be set with a volume_type of io1"
-  default     = 0
-}
-
-variable "ebs_volume_count" {
-  type        = number
-  description = "Count of EBS volumes that will be attached to the instance"
-  default     = 0
-}
-
 variable "delete_on_termination" {
   type        = bool
   description = "Whether the volume should be destroyed on instance termination"
@@ -298,4 +262,9 @@ variable "service_file" {
 variable "ssh_user" {
   type = string
   default = "ubuntu"
+}
+
+variable "instance_count" {
+  type = number
+  default = 1
 }
