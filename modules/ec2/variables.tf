@@ -4,12 +4,6 @@ variable "ssh_key_pair" {
   default     = "terraform_1"
 }
 
-variable "associate_public_ip_address" {
-  type        = bool
-  description = "Associate a public IP address with the instance"
-  default     = true
-}
-
 variable "assign_eip_address" {
   type        = bool
   description = "Assign an Elastic IP address to the instance"
@@ -28,8 +22,8 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "vpc_cidr" {
-    default = "10.0.0.0/16"
+variable "vpc_id" {
+    type  = string
 }
 
 variable "security_groups" {
@@ -102,13 +96,13 @@ variable "availability_zone" {
 variable "ami" {
   type        = string
   description = "The AMI to use for the instance. By default it is the AMI provided by Amazon with Ubuntu 16.04"
-  default     = ""
+  default     = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
 }
 
 variable "ami_owner" {
   type        = string
   description = "Owner of the given AMI (ignored if `ami` unset)"
-  default     = ""
+  default     = "099720109477"
 }
 
 variable "ebs_optimized" {
@@ -273,14 +267,35 @@ variable "instance_enabled" {
   default     = true
 }
 
-variable "additional_ips_count" {
-  type        = number
-  description = "Count of additional EIPs"
-  default     = 0
-}
-
 variable "permissions_boundary_arn" {
   type        = string
   description = "Policy ARN to attach to instance role as a permissions boundary"
   default     = ""
+}
+
+variable "subnet_id" {
+  type = string
+}
+
+variable "associate_public_ip_address" {
+  type        = bool
+  description = "Associate a public IP address with the instance"
+  default     = true
+}
+
+variable "key_name" {
+  type = string
+}
+
+variable "install_file" {
+  type = string
+}
+
+variable "service_file" {
+  type = string
+}
+
+variable "ssh_user" {
+  type = string
+  default = "ubuntu"
 }

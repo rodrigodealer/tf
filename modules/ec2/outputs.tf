@@ -1,8 +1,3 @@
-output "public_ip" {
-  description = "Public IP of instance (or EIP)"
-  value       = concat(aws_eip.default.*.public_ip, aws_instance.default.*.public_ip, [""])[0]
-}
-
 output "private_ip" {
   description = "Private IP of instance"
   value       = join("", aws_instance.default.*.private_ip)
@@ -43,6 +38,11 @@ output "security_group_ids" {
   )
 }
 
+output "instance_id" {
+  description = "IDs on the AWS EC2 Instances"
+  value = join("", aws_instance.default.*.id)
+}
+
 output "role" {
   description = "Name of AWS IAM Role associated with the instance"
   value       = join("", aws_iam_role.default.*.name)
@@ -53,20 +53,12 @@ output "alarm" {
   value       = join("", aws_cloudwatch_metric_alarm.default.*.id)
 }
 
-output "additional_eni_ids" {
-  description = "Map of ENI to EIP"
-  value = zipmap(
-    aws_network_interface.additional.*.id,
-    aws_eip.additional.*.public_ip
-  )
-}
-
-output "ebs_ids" {
-  description = "IDs of EBSs"
-  value       = aws_ebs_volume.default.*.id
-}
-
 output "primary_network_interface_id" {
   description = "ID of the instance's primary network interface"
   value       = join("", aws_instance.default.*.primary_network_interface_id)
+}
+
+output "public_ip" {
+  description = "Public IP of instance (or EIP)"
+  value       = concat(aws_eip.default.*.public_ip, aws_instance.default.*.public_ip, [""])[0]
 }

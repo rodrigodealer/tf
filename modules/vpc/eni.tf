@@ -6,21 +6,13 @@ resource "aws_network_interface" "additional" {
   count     = local.additional_ips_count
   subnet_id = aws_subnet.main.id
 
-  security_groups = compact(
-    concat(
-      [
-        var.create_default_security_group ? join("", aws_security_group.default.*.id) : ""
-      ],
-      var.security_groups
-    )
-  )
+  security_groups = var.security_group_ids
 
-  tags = module.label.tags
 }
 
 resource "aws_network_interface_attachment" "additional" {
   count                = local.additional_ips_count
-  instance_id          = join("", aws_instance.default.*.id)
+  instance_id          = var.instance_id
   network_interface_id = aws_network_interface.additional[count.index].id
   device_index         = 1 + count.index
 }
