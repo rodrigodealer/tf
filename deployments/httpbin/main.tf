@@ -30,3 +30,16 @@ module "httpbin" {
   service_file  = "httpbin"
 }
 
+module "elb" {
+  source        = "../../modules/elb"
+  region        = "us-east-1a"
+  instance_port = 80
+  lb_port       = 80
+  timeout       = 3
+  target        = "HTTP:80/"
+  lb_name       = "httpbin"
+
+  subnet_id     = module.vpc.subnet_id
+  instances     = module.httpbin.instance_ids 
+  security_groups = module.httpbin.security_groups
+}

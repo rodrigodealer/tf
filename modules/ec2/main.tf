@@ -1,7 +1,6 @@
 locals {
   instance_count       = 1
   security_group_count = 1
-  public_dns           = var.associate_public_ip_address && var.assign_eip_address && var.instance_enabled ? data.null_data_source.eip.outputs["public_dns"] : join("", aws_instance.default.*.public_dns)
 }
 
 data "aws_caller_identity" "default" {
@@ -113,15 +112,4 @@ resource "aws_instance" "default" {
   }
 
   tags = module.label.tags
-}
-
-resource "aws_eip" "default" {
-  network_interface = join("", aws_instance.default.*.primary_network_interface_id)
-  vpc               = true
-}
-
-data "null_data_source" "eip" {
-  inputs = {
-    public_dns = "ec2-${replace(join("", aws_eip.default.*.public_ip), ".", "-")}.${var.region == "us-east-1" ? "compute-1" : "${var.region}.compute"}.amazonaws.com"
-  }
 }
