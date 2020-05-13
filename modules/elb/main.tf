@@ -1,5 +1,5 @@
 resource "aws_elb" "main" {
-  name               = var.lb_name
+  name = var.lb_name
 
   listener {
     instance_port     = var.instance_port

@@ -7,19 +7,19 @@ variable "instance_port" {}
 variable "lb_port" {}
 
 variable "healthy_threshold" {
-    default = 2
+  default = 2
 }
 
 variable "unhealthy_threshold" {
-    default = 2
+  default = 2
 }
 
 variable "timeout" {
-    default = 3
+  default = 3
 }
 
 variable "interval" {
-    default = 10
+  default = 10
 }
 
 variable "target" {

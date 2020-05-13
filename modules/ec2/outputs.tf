@@ -35,17 +35,17 @@ output "security_group_ids" {
 
 output "security_groups" {
   description = "List of security groups"
-  value = aws_security_group.default.*.id
+  value       = aws_security_group.default.*.id
 }
 
 output "instance_id" {
   description = "IDs on the AWS EC2 Instances"
-  value = join("", aws_instance.default.*.id)
+  value       = join("", aws_instance.default.*.id)
 }
 
 output "instance_ids" {
   description = "IDs on the AWS EC2 Instances"
-  value = aws_instance.default.*.id
+  value       = aws_instance.default.*.id
 }
 
 output "role" {

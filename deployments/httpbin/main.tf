@@ -12,22 +12,22 @@ terraform {
 }
 
 module "vpc" {
-  source        = "../../modules/vpc"
+  source             = "../../modules/vpc"
   security_group_ids = module.httpbin.security_group_ids
-  instance_id   = module.httpbin.instance_id
+  instance_id        = module.httpbin.instance_id
 }
 
 module "httpbin" {
-  source        = "../../modules/ec2"
-  region        = "us-east-1"
-  name          = "httpbin"
-  subnet_id     = module.vpc.subnet_id
-  vpc_id        = module.vpc.vpc_id
+  source         = "../../modules/ec2"
+  region         = "us-east-1"
+  name           = "httpbin"
+  subnet_id      = module.vpc.subnet_id
+  vpc_id         = module.vpc.vpc_id
   instance_count = 2
-  key_name      = "terraform"
+  key_name       = "terraform"
 
-  install_file  = "install_docker.sh"
-  service_file  = "httpbin"
+  install_file = "install_docker.sh"
+  service_file = "httpbin"
 }
 
 module "elb" {
@@ -39,7 +39,7 @@ module "elb" {
   target        = "HTTP:80/"
   lb_name       = "httpbin"
 
-  subnet_id     = module.vpc.subnet_id
-  instances     = module.httpbin.instance_ids 
+  subnet_id       = module.vpc.subnet_id
+  instances       = module.httpbin.instance_ids
   security_groups = module.httpbin.security_groups
 }

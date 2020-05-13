@@ -23,7 +23,7 @@ variable "instance_type" {
 }
 
 variable "vpc_id" {
-    type  = string
+  type = string
 }
 
 variable "security_groups" {
@@ -260,11 +260,11 @@ variable "service_file" {
 }
 
 variable "ssh_user" {
-  type = string
+  type    = string
   default = "ubuntu"
 }
 
 variable "instance_count" {
-  type = number
+  type    = number
   default = 1
 }

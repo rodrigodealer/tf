@@ -1,21 +1,21 @@
 resource "aws_internet_gateway" "igw" {
-    vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.main.id
 }
 
 resource "aws_vpc" "main" {
-  cidr_block            = var.vpc_cidr
+  cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
-  enable_dns_support = true
+  enable_dns_support   = true
 }
 
 resource "aws_subnet" "main" {
-  vpc_id                    = aws_vpc.main.id
-  cidr_block                = var.vpc_cidr
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.vpc_cidr
 
-  map_public_ip_on_launch   = true
+  map_public_ip_on_launch = true
 
   depends_on = [
-      aws_internet_gateway.igw
+    aws_internet_gateway.igw
   ]
 }
 

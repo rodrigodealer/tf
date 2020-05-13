@@ -18,7 +18,7 @@ data "aws_ami" "ami" {
 
   filter {
     name   = "name"
-    values = [ var.ami ]
+    values = [var.ami]
   }
 
   filter {
@@ -26,7 +26,7 @@ data "aws_ami" "ami" {
     values = ["hvm"]
   }
 
-  owners = [ var.ami_owner ]
+  owners = [var.ami_owner]
 }
 
 
