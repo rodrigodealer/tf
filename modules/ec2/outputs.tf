@@ -8,6 +8,11 @@ output "private_dns" {
   value       = join("", aws_instance.default.*.private_dns)
 }
 
+output "public_dns" {
+  description = "Public DNS of instance"
+  value       = join("", aws_instance.default.*.public_dns)
+}
+
 output "id" {
   description = "Disambiguated ID of the instance"
   value       = join("", aws_instance.default.*.id)
@@ -46,6 +51,11 @@ output "instance_id" {
 output "instance_ids" {
   description = "IDs on the AWS EC2 Instances"
   value       = aws_instance.default.*.id
+}
+
+output "instances_dns" {
+  description = "Public DNS on the AWS EC2 Instances"
+  value       = aws_instance.default.*.public_dns
 }
 
 output "role" {
